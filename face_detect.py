@@ -12,23 +12,24 @@
 
 import sys 
 import os
-from opencv.cv import *
-from opencv.highgui import *
+import cv
+#from opencv.cv import *
+#from opencv.highgui import *
 
 def detectObjects(image):
     """Converts an image to grayscale and prints the locations of any 
     faces found"""
-    grayscale = cvCreateImage(cvSize(image.width, image.height), 8, 1)
-    cvCvtColor(image, grayscale, CV_BGR2GRAY)
+    grayscale = cv.CreateImage(cv.GetSize(image), 8, 1)
+    cv.CvtColor(image, grayscale, cv.CV_BGR2GRAY)
 
-    storage = cvCreateMemStorage(0)
-    cvClearMemStorage(storage)
-    cvEqualizeHist(grayscale, grayscale)
-    cascade = cvLoadHaarClassifierCascade(
-            '/home/brian/code/haarcascade_frontalface_default.xml',
-            cvSize(1,1))
-    faces = cvHaarDetectObjects(grayscale, cascade, storage, 1.2, 2,
-        CV_HAAR_DO_CANNY_PRUNING, cvSize(50,50))
+    # Deprecated v1 code???
+    storage = cv.CreateMemStorage(0)
+    #cv.ClearMemStorage(storage)
+    cv.EqualizeHist(grayscale, grayscale)
+    cascade = cv.Load(
+            '/home/brian/code/twisted-faces/haarcascade_frontalface_default.xml')
+    faces = cv.HaarDetectObjects(grayscale, cascade, storage, 1.2, 2,
+        cv.CV_HAAR_DO_CANNY_PRUNING)
 
 #    if faces:
     coords = []
@@ -159,7 +160,7 @@ def process_images(image_files, draw, input_path, output_path):
         print 'Processing image %s' % image_file
 
         # Process image
-        image = cvLoadImage(image_file)
+        image = cv.LoadImage(image_file)
         face_coords = detectObjects(image)
         #processed_image = None
 
