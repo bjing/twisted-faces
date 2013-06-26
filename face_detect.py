@@ -5,7 +5,7 @@
 # Face Detection using OpenCV. Based on sample code from:
 # http://python.pastebin.com/m76db1d6b
 
-# @author: Brian Jing
+# @author: bjing
 
 # Usage: python face_detect.py <image_file>
 # Usage: convert marty_mcguire.jpg -stroke red -fill none -draw "rectangle 50,36 115,101" output.jpg
